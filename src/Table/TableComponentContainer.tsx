@@ -1,4 +1,4 @@
-import React, {MouseEvent, useState} from "react";
+import React, {ChangeEvent, MouseEvent, useState} from "react";
 import {TableComponent} from "./TableComponent";
 import {initializeState, listType} from "../store";
 
@@ -6,28 +6,40 @@ import {initializeState, listType} from "../store";
 export const TableComponentContainer = () => {
 
     const [list, setList] = useState<listType[]>(initializeState)
+    const filterValue = (value: string, option:string) => {
+      if (value === "Выбрать") return
+        else if (value === option) return
+    }
 
-    const onClickHandler = (e: MouseEvent<HTMLSelectElement>) => {
-        const id = e.currentTarget.id;
-        const sel=document.querySelector(e.currentTarget.id)
-        const sortedList = [...list]
-        console.log( "id" +id)
-        console.log(sel)
-        // sortedList.sort((a, b) => a[id] > b[id] ? 1 : -1)
-        sortedList.filter((a) => a.unit === id)
-        console.log(id)
-        setList(sortedList)
+    const onChangeHandlerUnit = (e: ChangeEvent<HTMLSelectElement>) => {
+        const value = e.currentTarget.value;
+        const filterList = [...list]
+        const newFilterList = filterList.filter(e => value.includes(e.unit))
+        console.log(filterList.filter(e => value.includes(e.unit)));
+        console.log(newFilterList)
+        debugger
+        setList(newFilterList)
+    }
+    const onChangeHandlerJob = (e: ChangeEvent<HTMLSelectElement>) => {
+        const value = e.currentTarget.value;
+        const filterList = [...list]
+        const newFilterList = filterList.filter(e => value.includes(e.jobTitle))
+        console.log(filterList.filter(e => value.includes(e.jobTitle)));
+        console.log(newFilterList)
+        setList(newFilterList)
     }
 
     return (
         <>
             <div style={{textAlign: "center"}}><h2>Список сотрудников</h2>
-                <select id="mySelect" onClick={(e) => onClickHandler(e)}style={{padding: "3px", margin: "5px", width: "170px"}}>
-                    <option  id={'Выбрать отдел'}>Выбрать отдел</option>
-                    <option id={'Отдел продаж'}>Отдел продаж</option>
-                    <option id={'Отдел закупки'}>Отдел закупки</option>
+                <select id="Select" onChange={(e) => onChangeHandlerUnit(e)}
+                        style={{padding: "3px", margin: "5px", width: "170px"}}>
+                    <option value={'Выбрать отдел'}>Выбрать отдел</option>
+                    <option value={'Отдел продаж'}>Отдел продаж</option>
+                    <option value={'Отдел закупки'}>Отдел закупки</option>
                 </select>
-                <select style={{padding: "3px", margin: "5px", width: "170px"}}>
+                <select onChange={(e) => onChangeHandlerJob(e)}
+                        style={{padding: "3px", margin: "5px", width: "170px"}}>
                     <option value="Выбрать должность">Выбрать должность</option>
                     <option value="Директор">Директор</option>
                     <option value="Руководитель подразделения">Руководитель
