@@ -7,7 +7,7 @@ export const TableComponentContainer = () => {
 
     return (
         <>
-            <h2>Список работников</h2>
+            <h2>Список сотрудников</h2>
             <TableComponent
                 // list={list}
             />
