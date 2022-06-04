@@ -1,9 +1,9 @@
 import React, {MouseEvent, useState} from "react"
 import {initializeState, listType} from "../store";
+import {Line} from "./Line"
 import {
     Paper,
     Table,
-    TableBody,
     TableCell,
     TableContainer, TableHead,
 } from "@mui/material";
@@ -69,25 +69,5 @@ export const TableComponent = () => {
                                            id={id + 1}/>)}
             </Table>
         </TableContainer>
-    )
-}
-
-
-export const Line = (
-    {
-        key, fullName, bd, sex, jobTitle, unit, fullNameLeader, id
-    }
-) => {
-
-    return (
-        <TableBody>
-            <TableCell> {id}</TableCell>
-            <TableCell>{fullName}</TableCell>
-            <TableCell>{bd}</TableCell>
-            <TableCell>{sex}</TableCell>
-            <TableCell>{jobTitle}</TableCell>
-            <TableCell>{unit}</TableCell>
-            <TableCell>{fullNameLeader}</TableCell>
-        </TableBody>
     )
 }

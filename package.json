@@ -2,6 +2,7 @@
   "name": "deeplay2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mskuratova.github.io/deeplay/",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -30,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +56,7 @@
   "devDependencies": {
     "css-loader": "^1.0.0",
     "css-modules-typescript-loader": "^2.0.1",
+    "gh-pages": "^4.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
