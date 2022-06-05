@@ -2,8 +2,12 @@ import React from 'react';
 // @ts-ignore
 import s from './Modal.module.css'
 
+type ModalChangeType = {
+    onClickChange: () => void
+    children?: React.ReactNode
+}
 
-const ModalAdd = () => {
+const ModalChange:React.FC<ModalChangeType> = (props) => {
     return (
         <div className={s.background}>
             <div className={s.hystmodal} id="myModal">
@@ -16,18 +20,12 @@ const ModalAdd = () => {
                         <option>Контролер</option>
                         <option>Рабочий</option>
                     </select>
-                    {/*<select>*/}
-                    {/*    <option>Отдел продаж</option>*/}
-                    {/*    <option>Отдел закупки</option>*/}
-                    {/*</select>*/}
-                    <span><button data-hystclose className={s.hystmodal__close}>Изменить
+                    <span><button className={s.hystmodal__close}>Изменить
         </button>
-        <button data-hystclose
-                className={s.hystmodal__close}>Закрыть</button></span>
+        <button onClick={props.onClickChange} className={s.hystmodal__close}>Закрыть</button></span>
                 </div>
             </div>
         </div>)
-
 }
 
-export default ModalAdd;
+export default ModalChange;

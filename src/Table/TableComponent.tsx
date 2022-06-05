@@ -8,9 +8,14 @@ import {
     TableContainer, TableHead,
 } from "@mui/material";
 import ModalDelete from "./Modals/ModalDelete";
+import ModalAdd from "./Modals/ModalAdd";
+import ModalChange from "./Modals/ModalChange";
 
-export const TableComponent = () => {
+export const TableComponent: React.FC = () => {
     const [list, setList] = useState<listType[]>(initializeState)
+    const [flagAdd, setFlagAdd] = useState<boolean>(false)
+    const [flagDelete, setFlagDelete] = useState<boolean>(false)
+    const [flagChange, setFlagChange] = useState<boolean>(false)
 
     const onChangeHandlerUnit = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value;
@@ -40,11 +45,9 @@ export const TableComponent = () => {
         sortedList.sort((a, b) => a[id] > b[id] ? -1 : 1)
         setList(sortedList)
     }
-    const onClickDelete = () => {
-        alert('Delete')
-        debugger
-        return(<ModalDelete/>)
-    }
+    const onClickAdd = () => setFlagAdd(!flagAdd)
+    const onClickDelete = () => setFlagDelete(!flagDelete)
+    const onClickChange = () => setFlagChange(!flagChange)
 
     return (
         <TableContainer component={Paper}>
@@ -65,16 +68,16 @@ export const TableComponent = () => {
                     <option value="Контролер">Контролер</option>
                     <option value="Рабочий">Рабочий</option>
                 </select>
-                <button onClick={() => alert("Добавить")}
+                <button onClick={onClickAdd}
                         style={{padding: "3px", margin: "5px", width: "170px"}}>Добавить
                 </button>
                 <button onClick={onClickDelete}
                         style={{padding: "3px", margin: "5px", width: "170px"}}>Удалить
                 </button>
-                <button onClick={() => alert("Повысить")}
-                        style={{padding: "3px", margin: "5px", width: "170px"}}>Изменить должность
+                <button onClick={onClickChange}
+                        style={{padding: "3px", margin: "5px", width: "170px"}}>Изменить
+                    должность
                 </button>
-
             </div>
             <Table sx={{minWidth: 650}} aria-label="a dense table">
                 <TableHead>
@@ -111,6 +114,10 @@ export const TableComponent = () => {
                                            key={l.id}
                                            id={id + 1}/>)}
             </Table>
+            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}
+            /> : ''}
+            {flagDelete ? <ModalDelete onClickDelete={onClickDelete}><span>Иванов Иван Иванович</span></ModalDelete> : ''}
+            {flagChange ? <ModalChange onClickChange={onClickChange}/> : ''}
         </TableContainer>
     )
 }

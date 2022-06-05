@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import {MainTable} from "./Table/MainTable";
+import {TableComponent} from "./Table/TableComponent";
 
 function App() {
   return (
-    <MainTable/>
+    <TableComponent/>
   );
 }
 

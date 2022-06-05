@@ -2,8 +2,11 @@ import React from 'react';
 // @ts-ignore
 import s from './Modal.module.css'
 
+type ModalAddType ={
+    onClickAdd: ()=> void
+}
 
-const ModalAdd = () => {
+const ModalAdd:React.FC<ModalAddType> = (props) => {
     return (
         <div className={s.background}>
             <div className={s.hystmodal} id="myModal">
@@ -17,14 +20,15 @@ const ModalAdd = () => {
                         <option>Отдел продаж</option>
                         <option>Отдел закупки</option>
                     </select>
-                    <span><button data-hystclose className={s.hystmodal__close}>Добавить
-                    </button>
-                        <button data-hystclose
-                                className={s.hystmodal__close}>Закрыть</button></span>
+                    <span>
+                        <button className={s.hystmodal__close}>Добавить</button>
+                        <button
+                            onClick={props.onClickAdd}
+                            className={s.hystmodal__close}>Закрыть</button>
+                    </span>
                 </div>
             </div>
         </div>)
-
 }
 
 export default ModalAdd;
