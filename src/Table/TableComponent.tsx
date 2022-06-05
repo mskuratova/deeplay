@@ -7,6 +7,7 @@ import {
     TableCell,
     TableContainer, TableHead,
 } from "@mui/material";
+import ModalDelete from "./Modals/ModalDelete";
 
 export const TableComponent = () => {
     const [list, setList] = useState<listType[]>(initializeState)
@@ -15,19 +16,17 @@ export const TableComponent = () => {
         const value = e.currentTarget.value;
         const filterList = [...initializeState]
         const newFilterList = filterList.filter(e => value.includes(e.unit))
-        if (!value){
+        if (!value) {
             setList(initializeState)
-        }
-        else setList(newFilterList)
+        } else setList(newFilterList)
     }
     const onChangeHandlerJob = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value;
         const filterList = [...initializeState]
         const newFilterList = filterList.filter(e => value.includes(e.jobTitle))
-        if (!value){
+        if (!value) {
             setList(initializeState)
-        }
-        else setList(newFilterList)
+        } else setList(newFilterList)
     }
     const onClickHandlerUp = (e: MouseEvent<HTMLButtonElement>) => {
         const id = e.currentTarget.id;
@@ -40,6 +39,11 @@ export const TableComponent = () => {
         const sortedList = [...list]
         sortedList.sort((a, b) => a[id] > b[id] ? -1 : 1)
         setList(sortedList)
+    }
+    const onClickDelete = () => {
+        alert('Delete')
+        debugger
+        return(<ModalDelete/>)
     }
 
     return (
@@ -61,11 +65,14 @@ export const TableComponent = () => {
                     <option value="Контролер">Контролер</option>
                     <option value="Рабочий">Рабочий</option>
                 </select>
-                <button onClick={()=>alert("Добавить")} style={{padding: "3px", margin: "5px", width: "170px"}}>Добавить
+                <button onClick={() => alert("Добавить")}
+                        style={{padding: "3px", margin: "5px", width: "170px"}}>Добавить
                 </button>
-                <button onClick={()=>alert("Удалить")}style={{padding: "3px", margin: "5px", width: "170px"}}>Удалить
+                <button onClick={onClickDelete}
+                        style={{padding: "3px", margin: "5px", width: "170px"}}>Удалить
                 </button>
-                <button onClick={()=>alert("Повысить")}style={{padding: "3px", margin: "5px", width: "170px"}}>Повысить
+                <button onClick={() => alert("Повысить")}
+                        style={{padding: "3px", margin: "5px", width: "170px"}}>Изменить должность
                 </button>
 
             </div>
@@ -94,15 +101,7 @@ export const TableComponent = () => {
                             </button>
                         </div>
                     </TableCell>
-                    <TableCell>
-                        <div><span>Отдел</span>
-                            <button onClick={(e) => onClickHandlerUp(e)} id={'unit'}>↑
-                            </button>
-                            <button onClick={(e) => onClickHandlerUpDown(e)}
-                                    id={'unit'}>↓
-                            </button>
-                        </div>
-                    </TableCell>
+                    <TableCell>Отдел</TableCell>
                     <TableCell>Ф.И.О. начальника</TableCell>
                 </TableHead>
                 {list.map((l, id) => <Line fullName={l.fullName} bd={l.bd}

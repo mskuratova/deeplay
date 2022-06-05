@@ -10,7 +10,7 @@ export const Line = (
 
     return (
         <TableBody>
-            <TableCell> {id}</TableCell>
+            <TableCell><div><input type="checkbox"/><span>{id}</span></div></TableCell>
             <TableCell>{fullName}</TableCell>
             <TableCell>{bd}</TableCell>
             <TableCell>{sex}</TableCell>
