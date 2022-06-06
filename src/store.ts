@@ -15,7 +15,7 @@ export const initializeState: Array<listType> =
         {id: 4, fullName: "Иванова Мария Николавна", bd: "11.08.1985", sex: "ж.", jobTitle: "Контролер", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
         {id: 5, fullName: "Сидорова Ульяна Павлона", bd: "29.07.1980", sex: "ж.", jobTitle: "Контролер", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
         {id: 6, fullName: "Никифоров Николай Викторович", bd: "21.07.1983", sex: "м.", jobTitle: "Рабочий", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
-        {id: 7, fullName: "Гаврилов Петр Владиморович", bd: "11.02.1980", sex: "м.", jobTitle: "Рабочий", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
+        {id: 7, fullName: "Гаврилов Петр Владимирович", bd: "11.02.1980", sex: "м.", jobTitle: "Рабочий", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
         {id: 8, fullName: "Сергеев Андрей Иванович", bd: "20.04.1978", sex: "м.", jobTitle: "Рабочий", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
         {id: 9, fullName: "Романов Павел Викторович", bd: "19.09.1982", sex: "м.", jobTitle: "Рабочий", unit: "Отдел продаж", fullNameLeader: "Петров Иван Петрович" },
         {id: 10, fullName: "Агафьева Наталья Федоровна", bd: "10.10.1972", sex: "ж.", jobTitle: "Контролер", unit: "Отдел закупки", fullNameLeader: "Светлова Алена Сергеева" },

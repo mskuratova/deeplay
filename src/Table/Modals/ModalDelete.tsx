@@ -3,7 +3,8 @@ import React from 'react';
 import s from './Modal.module.css'
 
 type ModalDeleteType = {
-    onClickDelete: () => void
+    onClickDelete: (value:any) => void
+    onClickDeleteClose: () => void
     children?: React.ReactNode
 }
 
@@ -14,9 +15,9 @@ const ModalAdd: React.FC<ModalDeleteType> = (props) => {
                 <div className={s.hystmodal__window}>
                     <span>Удалить сотрудника</span>
                     <div>{props.children}</div>
-                        <span><button className={s.hystmodal__close}>Удалить
+                        <span><button onClick={props.onClickDelete} className={s.hystmodal__close}>Удалить
         </button>
-        <button onClick={props.onClickDelete}
+        <button onClick={props.onClickDeleteClose}
                 className={s.hystmodal__close}>Закрыть</button></span>
                     </div>
                 </div>

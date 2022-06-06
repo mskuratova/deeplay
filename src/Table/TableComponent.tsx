@@ -13,25 +13,32 @@ import ModalChange from "./Modals/ModalChange";
 
 export const TableComponent: React.FC = () => {
     const [list, setList] = useState<listType[]>(initializeState)
+    const [filterList, setFilterList] = useState<listType[]>(list)
     const [flagAdd, setFlagAdd] = useState<boolean>(false)
     const [flagDelete, setFlagDelete] = useState<boolean>(false)
     const [flagChange, setFlagChange] = useState<boolean>(false)
+    const [valueRadio, setValueRadio] = useState<number>()
+    const [valueFullName, setValueFullName] = useState<string>()
 
     const onChangeHandlerUnit = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value;
-        const filterList = [...initializeState]
-        const newFilterList = filterList.filter(e => value.includes(e.unit))
+        // const filterList = [...initializeState]
+        const secondFilterList = [...filterList].filter(e => value.includes(e.unit))
         if (!value) {
-            setList(initializeState)
-        } else setList(newFilterList)
+            setList(filterList)
+        } else setList(secondFilterList)
     }
     const onChangeHandlerJob = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value;
-        const filterList = [...initializeState]
-        const newFilterList = filterList.filter(e => value.includes(e.jobTitle))
+        const secondFilterList = [...filterList].filter(e => value.includes(e.jobTitle))
         if (!value) {
-            setList(initializeState)
-        } else setList(newFilterList)
+            setList(filterList)
+        } else setList(secondFilterList)
+        // const filterList = [...initializeState]
+        // const newFilterList = filterList.filter(e => value.includes(e.jobTitle))
+        // if (!value) {
+        //     setList(initializeState)
+        // } else setList(newFilterList)
     }
     const onClickHandlerUp = (e: MouseEvent<HTMLButtonElement>) => {
         const id = e.currentTarget.id;
@@ -46,7 +53,20 @@ export const TableComponent: React.FC = () => {
         setList(sortedList)
     }
     const onClickAdd = () => setFlagAdd(!flagAdd)
-    const onClickDelete = () => setFlagDelete(!flagDelete)
+    const onCheckedList = (value: number) => {
+        setValueRadio(value)
+    }
+    const onClickDelete = () => {
+        const name = list[valueRadio].fullName
+        setValueFullName(name)
+        const listDelete = [...list]
+        const newList = listDelete.filter(l => l.fullName !== name)
+        setList(newList)
+        setFilterList(newList)
+        setFlagDelete(false)
+    }
+    console.log(valueFullName)
+    const onClickDeleteClose = () => setFlagDelete(!flagDelete)
     const onClickChange = () => setFlagChange(!flagChange)
 
     return (
@@ -71,7 +91,7 @@ export const TableComponent: React.FC = () => {
                 <button onClick={onClickAdd}
                         style={{padding: "3px", margin: "5px", width: "170px"}}>Добавить
                 </button>
-                <button onClick={onClickDelete}
+                <button onClick={onClickDeleteClose}
                         style={{padding: "3px", margin: "5px", width: "170px"}}>Удалить
                 </button>
                 <button onClick={onClickChange}
@@ -112,11 +132,12 @@ export const TableComponent: React.FC = () => {
                                            jobTitle={l.jobTitle} unit={l.unit}
                                            fullNameLeader={l.fullNameLeader}
                                            key={l.id}
-                                           id={id + 1}/>)}
+                                           id={id + 1}
+                                           onChecked={() => onCheckedList(id)}/>)}
             </Table>
-            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}
-            /> : ''}
-            {flagDelete ? <ModalDelete onClickDelete={onClickDelete}><span>Иванов Иван Иванович</span></ModalDelete> : ''}
+            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}/> : ''}
+            {flagDelete ? <ModalDelete onClickDelete={onClickDelete}
+                                       onClickDeleteClose={onClickDeleteClose}><span>{'Ф.И.О.' + valueFullName}</span></ModalDelete> : ''}
             {flagChange ? <ModalChange onClickChange={onClickChange}/> : ''}
         </TableContainer>
     )
