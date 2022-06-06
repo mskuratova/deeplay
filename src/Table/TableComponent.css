@@ -9,7 +9,7 @@
 }
 
 .hystmodal {
- position: fixed;
+ position: relative;
  top: 0;
  bottom: 0;
  right: 0;
@@ -29,10 +29,12 @@
 
 .hystmodal__window {
  background: #fff;
+ padding: 3px;
+ margin: 5px;
 
  /* Установим по умолчанию ширину 600px
  но она будет не больше ширины браузера */
- width: 600px;
+ width: 500px;
  max-width: 100%;
 
  /* Заготовка для будущих анимаций */

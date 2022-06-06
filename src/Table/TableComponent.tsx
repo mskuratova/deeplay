@@ -52,9 +52,12 @@ export const TableComponent: React.FC = () => {
         sortedList.sort((a, b) => a[id] > b[id] ? -1 : 1)
         setList(sortedList)
     }
-    const onClickAdd = () => setFlagAdd(!flagAdd)
+    const onClickAddClose = () => setFlagAdd(!flagAdd)
     const onCheckedList = (value: number) => {
         setValueRadio(value)
+    }
+    const onClickAdd = () => {
+      alert("Add")
     }
     const onClickDelete = () => {
         const name = list[valueRadio].fullName
@@ -66,7 +69,11 @@ export const TableComponent: React.FC = () => {
         setFlagDelete(false)
     }
     console.log(valueFullName)
-    const onClickDeleteClose = () => setFlagDelete(!flagDelete)
+    const onClickDeleteClose = () => {
+        setFlagDelete(!flagDelete)
+        const name = list[valueRadio].fullName
+        setValueFullName(name)
+    }
     const onClickChange = () => setFlagChange(!flagChange)
 
     return (
@@ -88,7 +95,7 @@ export const TableComponent: React.FC = () => {
                     <option value="Контролер">Контролер</option>
                     <option value="Рабочий">Рабочий</option>
                 </select>
-                <button onClick={onClickAdd}
+                <button onClick={onClickAddClose}
                         style={{padding: "3px", margin: "5px", width: "170px"}}>Добавить
                 </button>
                 <button onClick={onClickDeleteClose}
@@ -135,9 +142,10 @@ export const TableComponent: React.FC = () => {
                                            id={id + 1}
                                            onChecked={() => onCheckedList(id)}/>)}
             </Table>
-            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}/> : ''}
+            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}
+                onClickAddClose={onClickAddClose}/> : ''}
             {flagDelete ? <ModalDelete onClickDelete={onClickDelete}
-                                       onClickDeleteClose={onClickDeleteClose}><span>{'Ф.И.О.' + valueFullName}</span></ModalDelete> : ''}
+                                       onClickDeleteClose={onClickDeleteClose}><span>{valueFullName}</span></ModalDelete> : ''}
             {flagChange ? <ModalChange onClickChange={onClickChange}/> : ''}
         </TableContainer>
     )
