@@ -51,6 +51,7 @@ export const TableComponent: React.FC = () => {
         setValueRadio(value)
     }
     const onClickAddClose = () => setFlagAdd(!flagAdd)
+
     const onClickAdd = (value: listType) => {
         const newList = [...list, value]
         setList(newList)
@@ -171,17 +172,17 @@ export const TableComponent: React.FC = () => {
                                            id={id + 1}
                                            onChecked={() => onCheckedList(id)}/>)}
             </Table>
-            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}
-                                 onClickAddClose={onClickAddClose}/> : ''}
+            {flagAdd ? <ModalAdd
+
+                onClickAdd={onClickAdd}
+                onClickAddClose={onClickAddClose}/> : ''}
             {flagDelete && valueRadio !== null ?
                 <ModalDelete onClickDelete={onClickDelete}
                              onClickDeleteClose={onClickDeleteClose}><span>{valueFullName}</span></ModalDelete> : ''}
 
             {flagChange && valueRadio !== null ?
-                <ModalChange onChangeJob={onChangeJob}
-                             onClickChange={onClickChange}
-                             onClickChangeClose={onClickChangeClose}>
-                    <span>{valueFullName}</span></ModalChange> : ''}
+                <ModalChange onChangeJob={onChangeJob} onClickChange={onClickChange}
+                             onClickChangeClose={onClickChangeClose}><span>{valueFullName}</span></ModalChange> : ''}
         </TableContainer>
     )
 }

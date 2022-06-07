@@ -9,14 +9,6 @@ type ModalChangeType = {
 }
 
 const ModalChange: React.FC<ModalChangeType> = (props) => {
-    debugger
-    const [jobTitle, setJobTitle] = useState<string>('Рабочий');
-    const onClickChange = (value: string) => {
-        debugger
-        setJobTitle(value)
-        props.onClickChange()
-    }
-    console.log(jobTitle)
 
     return (
         <div className={s.background}>
@@ -31,28 +23,8 @@ const ModalChange: React.FC<ModalChangeType> = (props) => {
                             подразделения
                         </option>
                         <option value={'Контролер'}>Контролер</option>
-                        {/*{jobTitle === 'Руководитель подразделения' ?*/}
-                        {/*    <option value={'Директор'}>Директор</option> :*/}
-                        {/*    <div>*/}
-                        {/*        <option value={''}></option>*/}
-                        {/*        <option value={'Директор'}>Директор</option>*/}
-                        {/*        <option value={'Руководитель подразделения'}>Руководитель*/}
-                        {/*            подразделения*/}
-                        {/*        </option>*/}
-                        {/*        <option value={'Контролер'}>Контролер</option>*/}
-                        {/*    </div>}*/}
-                        {/*{jobTitle === 'Контролер' ?*/}
-                        {/*    <option value={'Директор'}>Директор</option> :*/}
-                        {/*    <div>*/}
-                        {/*        <option value={''}></option>*/}
-                        {/*        <option value={'Директор'}>Директор</option>*/}
-                        {/*        <option value={'Руководитель подразделения'}>Руководитель*/}
-                        {/*            подразделения*/}
-                        {/*        </option>*/}
-                        {/*        <option value={'Контролер'}>Контролер</option>*/}
-                        {/*    </div>}*/}
                     </select>
-                    <span><button onClick={(value) => onClickChange}
+                    <span><button onClick={props.onClickChange}
                                   className={s.hystmodal__close}>Изменить
         </button>
         <button onClick={props.onClickChangeClose}
