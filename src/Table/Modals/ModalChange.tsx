@@ -14,7 +14,7 @@ const ModalChange: React.FC<ModalChangeType> = (props) => {
         <div className={s.background}>
             <div className={s.hystmodal} id="myModal">
                 <div className={s.hystmodal__window}>
-                    <span>Изменить должность</span>
+                    <span>Повысить</span>
                     <div>{props.children}</div>
                     <select onChange={(e) => props.onChangeJob(e)}>
                         <option value={''}></option>
@@ -23,7 +23,6 @@ const ModalChange: React.FC<ModalChangeType> = (props) => {
                             подразделения
                         </option>
                         <option value={'Контролер'}>Контролер</option>
-                        <option value={'Рабочий'}>Рабочий</option>
                     </select>
                     <span><button onClick={props.onClickChange}
                                   className={s.hystmodal__close}>Изменить

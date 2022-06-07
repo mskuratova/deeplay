@@ -1,34 +1,119 @@
-import React, {ChangeEvent, MouseEvent, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './Modal.module.css'
+import {getRandomFloat, listType} from "../../store";
 
 type ModalAddType = {
-    onClickAdd: (e: MouseEvent<HTMLButtonElement>) => void
+    // onAddFullName: (value: listType) => void
+    onClickAdd: (value: listType) => void
     onClickAddClose: () => void
 }
 const ModalAdd: React.FC<ModalAddType> = (props) => {
 
     const [fullName, semFulName] = useState<string>('Ф.И.О.')
     const [date, setDate] = useState<string>('');
-    const [value, setValue] = useState<Array<string | null>>(null)
+    const [sex, setSex] = useState<string>('');
+    const [jobTitle, setJobTitle] = useState<string>('');
+    const [unit, setUnit] = useState<string>('');
 
     const onChangeFullName = (e: ChangeEvent<HTMLInputElement>) => {
-        semFulName(e.currentTarget.value)
-        setValue([e.currentTarget.value])
+        semFulName(e.currentTarget.value);
     }
     const onChangeBD = (e: ChangeEvent<HTMLInputElement>) => {
-        const bd = e.currentTarget.value;
-        setDate(bd);
-        setValue([...value, bd.toString()])
+        setDate(e.currentTarget.value);
     }
-    const onChangeJob = (e: ChangeEvent<HTMLSelectElement>) => {
-        const job = e.currentTarget.value;
-        setValue([...value, job])
+    const onChangeSex = (e: ChangeEvent<HTMLSelectElement>) => {
+        setSex(e.currentTarget.value);
+    }
+    const onChangeJobTitle = (e: ChangeEvent<HTMLSelectElement>) => {
+        setJobTitle(e.currentTarget.value);
     }
     const onChangeUnit = (e: ChangeEvent<HTMLSelectElement>) => {
-        const unit = e.currentTarget.value;
-        setValue([...value, unit])
+        setUnit(e.currentTarget.value);
     }
-    console.log(value)
+    const onClickAdd = () => {
+        let value: listType = {} as listType
+        if (fullName === "Ф.И.О." && jobTitle === "Директор") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle || "Нет данных",
+                unit: null,
+                fullNameLeader: null
+            }
+        } else if (fullName === "Ф.И.О." && jobTitle === "Руководитель подразделения") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle || "Нет данных",
+                unit: unit || "Нет данных",
+                fullNameLeader: null
+            }
+        } else if (jobTitle === "Директор") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: fullName || "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle,
+                unit: null,
+                fullNameLeader: null
+            }
+        } else if (jobTitle === "Руководитель подразделения") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: fullName || "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle,
+                unit: unit || "Нет данных",
+                fullNameLeader: null
+            }
+        } else if (unit === "Отдел закупки") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: fullName || "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle || "Нет данных",
+                unit: unit,
+                fullNameLeader: "Светлова Алена Сергеевна"
+
+            }
+        } else if (unit === "Отдел продаж") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: fullName || "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle || "Нет данных",
+                unit: unit,
+                fullNameLeader: "Петров Иван Петрович"
+            }
+        } else if (fullName === "Ф.И.О.") {
+            value = {
+                id: getRandomFloat(14, 100),
+                fullName: "Нет данных",
+                bd: date || "Нет данных",
+                sex: sex || "Нет данных",
+                jobTitle: jobTitle || "Нет данных",
+                unit: unit || "Нет данных",
+                fullNameLeader: null
+            }
+        } else value = {
+            id: getRandomFloat(14, 100),
+            fullName: fullName || "Нет данных",
+            bd: date || "Нет данных",
+            sex: sex || "Нет данных",
+            jobTitle: jobTitle || "Нет данных",
+            unit: unit || "Нет данных",
+            fullNameLeader:  null
+        }
+        props.onClickAdd(value)
+    }
 
     return (
         <div className={s.background}>
@@ -38,10 +123,14 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                     <input type={"text"} value={fullName}
                            onChange={(e) => onChangeFullName(e)}/>
                     <input onChange={(e) => onChangeBD(e)}
-                           style={{padding: "3px", margin: "5px", width: "160px"}}
+                           className={s.universal}
                            type={"date"} name="bday" value={date}/>
-                    <select onChange={(e) => onChangeJob(e)}
-                            style={{padding: "3px", margin: "5px", width: "170px"}}>
+                    <select onChange={(e) => onChangeSex(e)} className={s.universal}>
+                        <option>м.</option>
+                        <option>ж.</option>
+                    </select>
+                    <select onChange={(e) => onChangeJobTitle(e)}
+                            className={s.universal}>
                         <option value={''}></option>
                         <option value={'Директор'}>Директор</option>
                         <option value={'Руководитель подразделения'}>Руководитель
@@ -51,19 +140,19 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                         <option value={'Рабочий'}>Рабочий</option>
                     </select>
                     <select onChange={(e) => onChangeUnit(e)}
-                            style={{padding: "3px", margin: "5px", width: "170px"}}>
+                            className={s.universal}>
                         <option value={null}></option>
                         <option value={'Отдел продаж'}>Отдел продаж</option>
                         <option value={'Отдел закупки'}>Отдел закупки</option>
                     </select>
                     <span>
                         <button
-                            onClick={(e) => props.onClickAdd(e)}
+                            onClick={onClickAdd}
                             className={s.hystmodal__close}>Добавить</button>
                         <button
                             onClick={props.onClickAddClose}
                             className={s.hystmodal__close}>Закрыть</button>
-                    </span>
+                        </span>
                 </div>
             </div>
         </div>)
