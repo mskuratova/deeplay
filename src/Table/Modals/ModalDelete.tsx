@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {MouseEventHandler} from 'react';
 import s from './Modal.module.css'
 
 type ModalDeleteType = {
-    onClickDelete: (value:any) => void
+    onClickDelete: () => void
     onClickDeleteClose: () => void
     children?: React.ReactNode
 }
@@ -14,14 +14,16 @@ const ModalAdd: React.FC<ModalDeleteType> = (props) => {
                 <div className={s.hystmodal__window}>
                     <span style={{padding: "3px", margin: "5px", width: "170px"}}><b>Удалить сотрудника:</b></span>
                     <div style={{padding: "3px", margin: "5px"}}>{props.children}</div>
-                        <span><button onClick={props.onClickDelete} className={s.hystmodal__close} style={{padding: "3px", margin: "5px"}}>Удалить
+                    <span><button onClick={props.onClickDelete}
+                                  className={s.hystmodal__close}
+                                  style={{padding: "3px", margin: "5px"}}>Удалить
         </button>
         <button onClick={props.onClickDeleteClose}
-                className={s.hystmodal__close} style={{padding: "3px", margin: "5px"}}>Закрыть</button></span>
-                    </div>
+                className={s.hystmodal__close}
+                style={{padding: "3px", margin: "5px"}}>Закрыть</button></span>
                 </div>
             </div>
-            )
-            }
-
-            export default ModalAdd;
+        </div>
+    )
+}
+export default ModalAdd;

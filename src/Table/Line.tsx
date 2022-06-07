@@ -6,10 +6,11 @@ export const Line = (
         fullName, bd, sex, jobTitle, unit, fullNameLeader, id, onChecked
     }
 ) => {
-    const [checked, setChecked] = useState<boolean>(false)
-    const onChangeChecked= (e:ChangeEvent) => {
+    const [pressed, setPressed] = useState<number | null>(null);
+    const [checked, setChecked] = useState<boolean | null>(false)
+    const onChangeChecked = (e: ChangeEvent) => {
         setChecked(!checked)
-        const value= e.target.id
+        const value = e.target.id
         onChecked(value)
     }
 
@@ -17,8 +18,15 @@ export const Line = (
 
         <TableBody>
             {checked ?
-                <TableCell><div><input type="radio" name="radioButton" /><span>{id}</span></div></TableCell>
-            :<TableCell><div><input id={id} type="radio" name="radioButton" onChange={(e)=>onChangeChecked(e)}/><span>{id}</span></div></TableCell>
+                <TableCell>
+                    <div><input type="radio" name="radioButton"
+                                value={id}/><span>{id}</span></div>
+                </TableCell>
+                : <TableCell>
+                    <div><input id={id} type="radio" name="radioButton" value={id}
+                                onChange={(e) => onChangeChecked(e)}/><span>{id}</span>
+                    </div>
+                </TableCell>
             }
             <TableCell>{fullName}</TableCell>
             <TableCell>{bd}</TableCell>
