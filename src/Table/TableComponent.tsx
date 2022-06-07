@@ -20,7 +20,6 @@ export const TableComponent: React.FC = () => {
     const [valueRadio, setValueRadio] = useState<number | null>(null)
     const [valueFullName, setValueFullName] = useState<string>()
     const [valueJob, setValueJob] = useState<string>()
-    // const [valuePerson, setValuePerson] = useState<listType>(null)
 
     const onChangeHandlerUnit = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value;
@@ -52,9 +51,6 @@ export const TableComponent: React.FC = () => {
         setValueRadio(value)
     }
     const onClickAddClose = () => setFlagAdd(!flagAdd)
-    // const onAddFullName = (value: listType) => {
-    //     setValuePerson(value)
-    // }
     const onClickAdd = (value: listType) => {
         const newList = [...list, value]
         setList(newList)
@@ -175,17 +171,17 @@ export const TableComponent: React.FC = () => {
                                            id={id + 1}
                                            onChecked={() => onCheckedList(id)}/>)}
             </Table>
-            {flagAdd ? <ModalAdd
-                // onAddFullName={onAddFullName}
-                                 onClickAdd={onClickAdd}
+            {flagAdd ? <ModalAdd onClickAdd={onClickAdd}
                                  onClickAddClose={onClickAddClose}/> : ''}
             {flagDelete && valueRadio !== null ?
                 <ModalDelete onClickDelete={onClickDelete}
                              onClickDeleteClose={onClickDeleteClose}><span>{valueFullName}</span></ModalDelete> : ''}
 
             {flagChange && valueRadio !== null ?
-                <ModalChange onChangeJob={onChangeJob} onClickChange={onClickChange}
-                             onClickChangeClose={onClickChangeClose}><span>{valueFullName}</span></ModalChange> : ''}
+                <ModalChange onChangeJob={onChangeJob}
+                             onClickChange={onClickChange}
+                             onClickChangeClose={onClickChangeClose}>
+                    <span>{valueFullName}</span></ModalChange> : ''}
         </TableContainer>
     )
 }

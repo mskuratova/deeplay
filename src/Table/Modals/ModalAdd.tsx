@@ -3,7 +3,6 @@ import s from './Modal.module.css'
 import {getRandomFloat, listType} from "../../store";
 
 type ModalAddType = {
-    // onAddFullName: (value: listType) => void
     onClickAdd: (value: listType) => void
     onClickAddClose: () => void
 }
@@ -37,7 +36,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle || "Нет данных",
                 unit: null,
                 fullNameLeader: null
@@ -47,7 +46,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle || "Нет данных",
                 unit: unit || "Нет данных",
                 fullNameLeader: null
@@ -57,7 +56,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: fullName || "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle,
                 unit: null,
                 fullNameLeader: null
@@ -67,7 +66,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: fullName || "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle,
                 unit: unit || "Нет данных",
                 fullNameLeader: null
@@ -77,7 +76,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: fullName || "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle || "Нет данных",
                 unit: unit,
                 fullNameLeader: "Светлова Алена Сергеевна"
@@ -88,7 +87,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: fullName || "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle || "Нет данных",
                 unit: unit,
                 fullNameLeader: "Петров Иван Петрович"
@@ -98,7 +97,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
                 id: getRandomFloat(14, 100),
                 fullName: "Нет данных",
                 bd: date || "Нет данных",
-                sex: sex || "Нет данных",
+                sex: sex || "м.",
                 jobTitle: jobTitle || "Нет данных",
                 unit: unit || "Нет данных",
                 fullNameLeader: null
@@ -107,7 +106,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
             id: getRandomFloat(14, 100),
             fullName: fullName || "Нет данных",
             bd: date || "Нет данных",
-            sex: sex || "Нет данных",
+            sex: sex || "м.",
             jobTitle: jobTitle || "Нет данных",
             unit: unit || "Нет данных",
             fullNameLeader:  null
