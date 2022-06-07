@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/deeplay/static/css/main.8166adff.css",
-    "main.js": "/deeplay/static/js/main.0f624a78.js",
+    "main.js": "/deeplay/static/js/main.c7a5f88e.js",
     "static/js/111.b2070364.chunk.js": "/deeplay/static/js/111.b2070364.chunk.js",
     "index.html": "/deeplay/index.html",
     "main.8166adff.css.map": "/deeplay/static/css/main.8166adff.css.map",
-    "main.0f624a78.js.map": "/deeplay/static/js/main.0f624a78.js.map",
+    "main.c7a5f88e.js.map": "/deeplay/static/js/main.c7a5f88e.js.map",
     "111.b2070364.chunk.js.map": "/deeplay/static/js/111.b2070364.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8166adff.css",
-    "static/js/main.0f624a78.js"
+    "static/js/main.c7a5f88e.js"
   ]
 }
