@@ -118,7 +118,7 @@ const ModalAdd: React.FC<ModalAddType> = (props) => {
         <div className={s.background}>
             <div className={s.hystmodal} id="myModal">
                 <div className={s.hystmodal__window}>
-                    <span>Добавить сотрудника</span>
+                    <span><b>Добавить сотрудника</b></span>
                     <input type={"text"} value={fullName}
                            onChange={(e) => onChangeFullName(e)}/>
                     <input onChange={(e) => onChangeBD(e)}

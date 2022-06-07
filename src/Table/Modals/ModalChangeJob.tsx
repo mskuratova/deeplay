@@ -8,14 +8,14 @@ type ModalChangeType = {
     children?: React.ReactNode
 }
 
-const ModalChange: React.FC<ModalChangeType> = (props) => {
+const ModalChangeJob: React.FC<ModalChangeType> = (props) => {
     const jobTitle = props.children[1]
 
     return (
         <div className={s.background}>
             <div className={s.hystmodal} id="myModal">
                 <div className={s.hystmodal__window}>
-                    <span>Повысить</span>
+                    <span><b>Повысить</b></span>
                     <div>{props.children[0]}</div>
                     <select onChange={(e) => props.onChangeJob(e)} className={s.universal}>
                         <option value={''}></option>
@@ -37,4 +37,4 @@ const ModalChange: React.FC<ModalChangeType> = (props) => {
         </div>)
 }
 
-export default ModalChange;
+export default ModalChangeJob;

@@ -2,24 +2,30 @@ import React, {ChangeEvent, MouseEvent, useState} from "react"
 import {initializeState, listType} from "../store";
 import {Line} from "./Line"
 import {
+    Button,
     Paper, Table,
     TableCell,
     TableContainer, TableHead,
 } from "@mui/material";
 import ModalDelete from "./Modals/ModalDelete";
 import ModalAdd from "./Modals/ModalAdd";
-import ModalChange from "./Modals/ModalChange";
-import s from './TableComponent.css';
+import ModalChangeJob from "./Modals/ModalChangeJob";
+import s from './TableComponent.module.css';
+import ModalChangeFullName from "./Modals/ModalChangeFullName";
 
 export const TableComponent: React.FC = () => {
     const [list, setList] = useState<listType[]>(initializeState)
     const [filterList, setFilterList] = useState<listType[]>(list)
     const [flagAdd, setFlagAdd] = useState<boolean>(false)
     const [flagDelete, setFlagDelete] = useState<boolean>(false)
-    const [flagChange, setFlagChange] = useState<boolean>(false)
+    const [flagChangeFullName, setFlagChangeFullName] = useState<boolean>(false)
+    const [flagChangeJob, setFlagChangeJob] = useState<boolean>(false)
     const [valueRadio, setValueRadio] = useState<number | null>(null)
     const [valueFullName, setValueFullName] = useState<string>()
+    const [fullName, setFullName] = useState<string>()
     const [valueJob, setValueJob] = useState<string>()
+
+    const buttonStyle = {margin: "3px", color: "black", padding: "4px"}
 
     const onChangeHandlerUnit = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value;
@@ -51,7 +57,6 @@ export const TableComponent: React.FC = () => {
         setValueRadio(value)
     }
     const onClickAddClose = () => setFlagAdd(!flagAdd)
-
     const onClickAdd = (value: listType) => {
         const newList = [...list, value]
         setList(newList)
@@ -67,7 +72,16 @@ export const TableComponent: React.FC = () => {
         setFilterList(newList)
         setFlagDelete(false)
         setValueRadio(null)
-
+    }
+    const onClickChangeFullName = (value: string) => {
+        console.log(value)
+        const name = list[valueRadio].fullName
+        setValueFullName(name)
+        const listDelete = [...list]
+        const newList = listDelete.filter(l => l.fullName !== name)
+        setList(newList)
+        setFilterList(newList)
+        setFlagChangeFullName(false)
     }
     const onClickDeleteClose = () => {
         if (valueRadio !== null) {
@@ -78,9 +92,22 @@ export const TableComponent: React.FC = () => {
             alert('Выберите сотрудника')
         }
     }
+    const onChangeFullName = (e: ChangeEvent<HTMLSelectElement>) => {
+        const value = e.currentTarget.value
+        setFullName(value)
+    }
     const onChangeJob = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value
         setValueJob(value)
+    }
+    const onClickChangeFullNameClose = () => {
+        if (valueRadio !== null) {
+            setFlagChangeFullName(!flagChangeFullName)
+            const name = list[valueRadio].fullName
+            setValueFullName(name)
+        } else {
+            alert('Выберите сотрудника')
+        }
     }
     const onClickChange = () => {
         const name = list[valueRadio].fullName
@@ -95,11 +122,11 @@ export const TableComponent: React.FC = () => {
         } else list[valueRadio].jobTitle = valueJob
         setList(newList)
         setFilterList(newList)
-        setFlagChange(false)
+        setFlagChangeJob(false)
     }
     const onClickChangeClose = () => {
         if (valueRadio !== null) {
-            setFlagChange(!flagChange)
+            setFlagChangeJob(!flagChangeJob)
             const name = list[valueRadio].fullName
             setValueFullName(name)
         } else {
@@ -126,15 +153,20 @@ export const TableComponent: React.FC = () => {
                     <option value="Контролер">Контролер</option>
                     <option value="Рабочий">Рабочий</option>
                 </select>
-                <button onClick={onClickAddClose}
-                        className={s.universal}>Добавить
-                </button>
-                <button onClick={onClickDeleteClose}
-                        className={s.universal}>Удалить
-                </button>
-                <button onClick={onClickChangeClose}
-                        className={s.universal}>Повысить
-                </button>
+                <Button variant={"outlined"} style={buttonStyle} className={s.button}
+                        onClick={onClickAddClose}>Добавить
+                </Button>
+                <Button variant={"outlined"} style={buttonStyle}
+                        onClick={onClickDeleteClose}>Удалить
+                </Button>
+                <Button variant={"outlined"} style={buttonStyle}
+                        onClick={onClickChangeFullNameClose}
+                >Изменить Ф.И.О.
+                </Button>
+                <Button variant={"outlined"} style={buttonStyle}
+                        onClick={onClickChangeClose}
+                >Повысить
+                </Button>
             </div>
             <Table sx={{minWidth: 650}} aria-label="a dense table">
                 <TableHead>
@@ -173,16 +205,19 @@ export const TableComponent: React.FC = () => {
                                            onChecked={() => onCheckedList(id)}/>)}
             </Table>
             {flagAdd ? <ModalAdd
-
                 onClickAdd={onClickAdd}
                 onClickAddClose={onClickAddClose}/> : ''}
             {flagDelete && valueRadio !== null ?
                 <ModalDelete onClickDelete={onClickDelete}
                              onClickDeleteClose={onClickDeleteClose}><span>{valueFullName}</span></ModalDelete> : ''}
-
-            {flagChange && valueRadio !== null ?
-                <ModalChange onChangeJob={onChangeJob} onClickChange={onClickChange}
-                             onClickChangeClose={onClickChangeClose}>{[valueFullName, list[valueRadio].jobTitle]}</ModalChange> : ''}
+            {flagChangeFullName && valueRadio !== null ?
+                <ModalChangeFullName
+                    // onChangeFullName={onChangeFullName}
+                                     onClickChangeFullName={onClickChangeFullName}
+                                     onClickChangeClose={onClickChangeFullNameClose}>{[valueFullName]}</ModalChangeFullName> : ''}
+            {flagChangeJob && valueRadio !== null ?
+                <ModalChangeJob onChangeJob={onChangeJob} onClickChange={onClickChange}
+                                onClickChangeClose={onClickChangeClose}>{[valueFullName, list[valueRadio].jobTitle]}</ModalChangeJob> : ''}
         </TableContainer>
     )
 }

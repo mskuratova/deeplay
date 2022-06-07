@@ -29,18 +29,15 @@
  background: #fff;
  padding: 3px;
  margin: 5px;
-
- /* Установим по умолчанию ширину 600px
- но она будет не больше ширины браузера */
  width: 500px;
  max-width: 100%;
 
- /* Заготовка для будущих анимаций */
- transition: transform 0.15s ease 0s, opacity 0.15s ease 0s;
- transform: scale(1);
 }
 .universal {
- padding: 3px;
- margin: 5px;
+ padding: 5px;
+ margin: 16px;
  width: 170px;
+}
+.button:hover{
+ background-color: gold;
 }
