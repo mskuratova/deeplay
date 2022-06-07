@@ -182,7 +182,7 @@ export const TableComponent: React.FC = () => {
 
             {flagChange && valueRadio !== null ?
                 <ModalChange onChangeJob={onChangeJob} onClickChange={onClickChange}
-                             onClickChangeClose={onClickChangeClose}><span>{valueFullName}</span></ModalChange> : ''}
+                             onClickChangeClose={onClickChangeClose}>{[valueFullName, list[valueRadio].jobTitle]}</ModalChange> : ''}
         </TableContainer>
     )
 }
