@@ -1,4 +1,4 @@
-import React, {MouseEventHandler} from 'react';
+import React from 'react';
 import s from './Modal.module.css'
 
 type ModalDeleteType = {

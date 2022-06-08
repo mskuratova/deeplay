@@ -1,13 +1,6 @@
 .tableInfoRowContainer {
  margin-bottom: auto;
 }
-.tableComponentList {
-
-}
-.tableComponentItem {
-
-}
-
 .hystmodal {
  position: relative;
  top: 0;
@@ -31,7 +24,6 @@
  margin: 5px;
  width: 500px;
  max-width: 100%;
-
 }
 .universal {
  padding: 5px;
