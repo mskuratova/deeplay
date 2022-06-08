@@ -2,8 +2,7 @@ import React, {ChangeEvent, MouseEvent, useState} from "react"
 import {initializeState, listType} from "../store";
 import {Line} from "./Line"
 import {
-    Button,
-    Paper, Table,
+    Button, Paper, Table,
     TableCell,
     TableContainer, TableHead,
 } from "@mui/material";
@@ -22,7 +21,6 @@ export const TableComponent: React.FC = () => {
     const [flagChangeJob, setFlagChangeJob] = useState<boolean>(false)
     const [valueRadio, setValueRadio] = useState<number | null>(null)
     const [valueFullName, setValueFullName] = useState<string>()
-    const [fullName, setFullName] = useState<string>()
     const [valueJob, setValueJob] = useState<string>()
 
     const buttonStyle = {margin: "3px", color: "black", padding: "4px"}
@@ -74,13 +72,12 @@ export const TableComponent: React.FC = () => {
         setValueRadio(null)
     }
     const onClickChangeFullName = (value: string) => {
-        console.log(value)
         const name = list[valueRadio].fullName
         setValueFullName(name)
-        const listDelete = [...list]
-        const newList = listDelete.filter(l => l.fullName !== name)
-        setList(newList)
-        setFilterList(newList)
+        const listChange = [...list]
+        listChange[valueRadio].fullName = value
+        setList(listChange)
+        setFilterList(listChange)
         setFlagChangeFullName(false)
     }
     const onClickDeleteClose = () => {
@@ -91,10 +88,6 @@ export const TableComponent: React.FC = () => {
         } else {
             alert('Выберите сотрудника')
         }
-    }
-    const onChangeFullName = (e: ChangeEvent<HTMLSelectElement>) => {
-        const value = e.currentTarget.value
-        setFullName(value)
     }
     const onChangeJob = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value
@@ -113,14 +106,14 @@ export const TableComponent: React.FC = () => {
         const name = list[valueRadio].fullName
         setValueFullName(name)
         const newList = [...list]
+        list[valueRadio].jobTitle = valueJob
         if (valueJob === "Директор") {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            list[valueRadio].jobTitle = valueJob, list[valueRadio].unit = null, list[valueRadio].fullNameLeader = null
+            list[valueRadio].unit = null, list[valueRadio].fullNameLeader = null
         } else if (valueJob === "Руководитель подразделения") {
-            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            list[valueRadio].jobTitle = valueJob, list[valueRadio].fullNameLeader = null
-        } else list[valueRadio].jobTitle = valueJob
-        setList(newList)
+            list[valueRadio].fullNameLeader = null
+        } else
+            setList(newList)
         setFilterList(newList)
         setFlagChangeJob(false)
     }
@@ -212,9 +205,8 @@ export const TableComponent: React.FC = () => {
                              onClickDeleteClose={onClickDeleteClose}><span>{valueFullName}</span></ModalDelete> : ''}
             {flagChangeFullName && valueRadio !== null ?
                 <ModalChangeFullName
-                    // onChangeFullName={onChangeFullName}
-                                     onClickChangeFullName={onClickChangeFullName}
-                                     onClickChangeClose={onClickChangeFullNameClose}>{[valueFullName]}</ModalChangeFullName> : ''}
+                    onClickChangeFullName={onClickChangeFullName}
+                    onClickChangeClose={onClickChangeFullNameClose}>{[valueFullName]}</ModalChangeFullName> : ''}
             {flagChangeJob && valueRadio !== null ?
                 <ModalChangeJob onChangeJob={onChangeJob} onClickChange={onClickChange}
                                 onClickChangeClose={onClickChangeClose}>{[valueFullName, list[valueRadio].jobTitle]}</ModalChangeJob> : ''}

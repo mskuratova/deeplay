@@ -1,9 +1,8 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './Modal.module.css'
-import {listType} from "../../store";
+
 
 type ModalChangeType = {
-    // onChangeFullName: (e: ChangeEvent<HTMLInputElement>) => void
     onClickChangeFullName: (value: string) => void
     onClickChangeClose: () => void
     children?: React.ReactNode
